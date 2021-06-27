@@ -16,18 +16,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_first" -->
-
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/remote_rectangle"/>
     <Switch
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="194dp"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
         android:text="status"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.458"
+        app:layout_constraintVertical_bias="0.637"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <TextView
@@ -42,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch1"
-        app:layout_constraintVertical_bias="0.508" />
+        app:layout_constraintVertical_bias="0.195" />
 
     <Button
         android:id="@+id/temp_down"
@@ -72,43 +78,49 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="left"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber">
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
+        app:layout_constraintVertical_bias="0.373">
+
         <ImageButton
             android:id="@+id/fan_level_1"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@android:color/transparent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
             android:scaleType="centerInside"
-            android:src="@drawable/fan_level_1_disabled"/>
+            android:src="@drawable/fan_level_1_disabled" />
+
         <ImageButton
             android:id="@+id/fan_level_2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@android:color/transparent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
             android:scaleType="centerInside"
-            android:src="@drawable/fan_level_2_disabled"/>
+            android:src="@drawable/fan_level_2_disabled" />
+
         <ImageButton
             android:id="@+id/fan_level_3"
-            android:background="@android:color/transparent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
             android:scaleType="centerInside"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/fan_level_3_disabled"/>
+            android:src="@drawable/fan_level_3_disabled" />
+
         <ImageButton
             android:id="@+id/fan_level_4"
-            android:layout_width="40dp"
-            android:background="@android:color/transparent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
             android:scaleType="centerInside"
-            android:layout_height="40dp"
-            android:src="@drawable/fan_level_4_disabled"/>
+            android:src="@drawable/fan_level_4_disabled" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

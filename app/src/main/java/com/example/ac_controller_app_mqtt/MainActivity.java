@@ -138,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void startMqttConnection(String clientId, String username, String password) {
         try {
-            //TODO: 3.142.144.189:1883
             mqttClient = new MqttAsyncClient("tcp://ec2-3-142-144-189.us-east-2.compute.amazonaws.com:1883",clientId, new MemoryPersistence());
 
         } catch (MqttException e) {
