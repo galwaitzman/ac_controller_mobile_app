@@ -5,6 +5,7 @@ The system is capable of controlling power, temperature and fan speed.
 ## Technologies & Hardware
 * HiveMQ-CE MQTT Server with File RBAC Extension 
 * Paho MQTT Python Client Library (for controller)
+* Android SDK
 * Paho MQTT Library for Android (for mobile app)
 * AWS EC2 (for hosting the server)
 * Raspberry Pi 4 with Raspbian OS (Linux)
@@ -14,9 +15,9 @@ The system is capable of controlling power, temperature and fan speed.
 ## Project Phases
 ### Choosing Platforms & Protocols
 When you're on your way home in July, waiting for your AC unit to turn on after sending the command from your mobile is completely unacceptable. Therefore, polling for commands was
-out of the question. I needed a Real-Time solution, and MQTT protocol provides exactly this - a topic-based publisher-subscriber model with realtively short turnaround times
+out of the question. I needed a Real-Time solution, and MQTT protocol provided me with exactly this: a topic-based publisher-subscriber model with realtively short turnaround times
 for this project's purposes. I used HiveMQ Community Edition MQTT Server, and installed it along with the RBAC Extension on an AWS EC2 instance. <br/>
-sdfsdf
+As for the controller unit, I chose Raspberry Pi because of its functional flexibility, small size and low price. 
 ### Defining MQTT Roles & Credentials
 ### Implementing MQTT Clients
 #### Mobile App
