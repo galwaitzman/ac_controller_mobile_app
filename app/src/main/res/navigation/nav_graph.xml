@@ -9,7 +9,7 @@
         android:id="@+id/FirstFragment"
         android:name="com.example.ac_controller_app_mqtt.RemoteFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_remote">
 
         <!--action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
