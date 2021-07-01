@@ -11,11 +11,11 @@
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
-        <action
+        <!--action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/SecondFragment" /-->
     </fragment>
-    <fragment
+    <!--fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.ac_controller_app_mqtt.SecondFragment"
         android:label="@string/second_fragment_label"
@@ -24,7 +24,7 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
-    </fragment>
+    </fragment-->
     <fragment
         android:id="@+id/First2Fragment"
         android:name="com.example.ac_controller_app_mqtt.First2Fragment"

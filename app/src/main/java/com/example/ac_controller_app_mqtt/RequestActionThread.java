@@ -72,7 +72,6 @@ public class RequestActionThread extends Thread {
         }
 
         try {
-            //TODO: e4:5f:01:0e:0d:df
             mqttClient.publish("commands/controller_e4:5f:01:0e:0d:df/"+subTopic, new MqttMessage(commandMsgContent.getBytes()));
             userAwaitsReply.set(true);
             ResponseTimeOutThread timeOutThread = new ResponseTimeOutThread(activity, 2000, userAwaitsReply);

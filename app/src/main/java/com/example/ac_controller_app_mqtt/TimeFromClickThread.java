@@ -2,8 +2,10 @@ package com.example.ac_controller_app_mqtt;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 
 
@@ -19,6 +21,7 @@ public class TimeFromClickThread extends Thread {
     private final ImageButton fan2;
     private final ImageButton fan3;
     private final ImageButton fan4;
+    private final ProgressBar waitForStatusBar;
     private final Actions action;
     private final Integer tempParam;
 
@@ -31,6 +34,7 @@ public class TimeFromClickThread extends Thread {
         this.fan2 = activity.findViewById(R.id.fan_level_2);
         this.fan3 = activity.findViewById(R.id.fan_level_3);
         this.fan4 = activity.findViewById(R.id.fan_level_4);
+        this.waitForStatusBar = activity.findViewById(R.id.wait_for_status_bar);
         this.action = action;
         this.tempParam = tempParam;
     }
@@ -43,7 +47,7 @@ public class TimeFromClickThread extends Thread {
                             @Override
                             public void run() {
                                 activity.runOnUiThread(() -> {
-
+                                    waitForStatusBar.setVisibility(View.VISIBLE);
                                 temp_up.setEnabled(false);
                                 temp_down.setEnabled(false);
                                 power.setEnabled(false);

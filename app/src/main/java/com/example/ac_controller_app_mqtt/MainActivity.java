@@ -31,6 +31,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sp;
     static Integer current_temp = 0;
     static AtomicBoolean userAwaitsReply;
+    private ProgressBar waitForStatusBar;
     private String clientId;
     private String username;
     private String password;
@@ -117,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("signin","startingactivity");
         }
 
+        waitForStatusBar = findViewById(R.id.wait_for_status_bar);
         temp_down = findViewById(R.id.temp_down);
         temp_up = findViewById(R.id.temp_up);
         power_switch = findViewById(R.id.switch1);
@@ -290,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
                         fan4.setEnabled(false);
                         setCurrentFanSpeedImages(MainActivity.this,"FAN_SPEED_NONE");
                     }
-
+                    waitForStatusBar.setVisibility(View.GONE);
                     if (finalPlaySound) {
                         soundPlayer.start();
                     }
