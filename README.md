@@ -14,6 +14,7 @@ The system is capable of controlling power, temperature and fan speed.
 * Paho MQTT Python Client Library
 * Lirc Virtual Device for Linux
 * ir-ctl tool for Linux
+* Cron Utility
 ## Hardware
 * Raspberry Pi 4 with Raspbian OS (Linux)
 * IR Receiver
@@ -39,7 +40,7 @@ The controller's ClientId contains its mac address, so it can only receive messa
 Implementing the execution of the received commands included two phases:
 1. Preliminary phase: building an IR receiver circuit and recording signals of the original remote-control of the AC unit, using Lirc virtual device and ir-ctl tool.
 2. Operational phase: Building an IR transmitter circuit to be used for transmitting the relevant IR signals.
-Ultimately, I used crontab utility to make the program run at OS startup, and installed the controller within clear sight of the AC unit IR receiver.
+Ultimately, I used Cron utility to make the program run at OS startup, and installed the controller within clear sight of the AC unit IR receiver.
 ## System Workflow
 Commands are sent from mobile app users to the MQTT server, which passes them on to the controller. The controller executes the commands by sending IR signals to the AC unit, and sends confirmation messages back to mobile app users.<br/><br/>
 <img src="https://github.com/galwaitzman/ac_controller_mobile_app/blob/master/%E2%80%8F%E2%80%8Fworkflow.PNG" width = "60%" height="60%">
