@@ -41,6 +41,6 @@ Implementing the execution of the received commands included two phases:
 2. Operational phase: Building an IR transmitter circuit to be used for transmitting the relevant IR signals.
 Ultimately, I used crontab utility to make the program run at OS startup, and installed the controller within clear sight of the AC unit IR receiver.
 ## System Workflow
-Commands are sent from mobile app users to the MQTT server, which passes them on to the controller. The controller executes the commands by sending IR signals to the AC unit, and sends confirmation messages back to mobile app users.<br/><br/><br/>
+Commands are sent from mobile app users to the MQTT server, which passes them on to the controller. The controller executes the commands by sending IR signals to the AC unit, and sends confirmation messages back to mobile app users.<br/><br/>
 <img src="https://github.com/galwaitzman/ac_controller_mobile_app/blob/master/%E2%80%8F%E2%80%8Fworkflow.PNG" width = "60%" height="60%">
 ## Demo
