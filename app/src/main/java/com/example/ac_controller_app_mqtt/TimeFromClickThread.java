@@ -42,7 +42,7 @@ public class TimeFromClickThread extends Thread {
         public void run() {
 
                     try {
-                        TimeUnit.MILLISECONDS.sleep(1200);
+                        TimeUnit.MILLISECONDS.sleep(1000);
                         activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

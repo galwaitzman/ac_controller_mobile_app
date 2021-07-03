@@ -162,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                     // e4:5f:01:0e:0d:df
                     mqttClient.publish("commands/controller_e4:5f:01:0e:0d:df",new MqttMessage("STATUS_REQUEST".getBytes()));
                     Log.d("publishing","pub");
+                    waitForStatusBar.setVisibility(View.VISIBLE);
                 } catch (MqttException e) {
                     e.printStackTrace();
                 }
