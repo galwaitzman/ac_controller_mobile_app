@@ -1,6 +1,6 @@
 # Remote AC Controller
 ## Description
-This project's purpose is to remotely control AC units which are not intrinsically Wifi-compatible. The system consists of a Raspberry-Pi-based controller connected to an IR transmitting circuit, and a mobile app for sending commands.
+This project's purpose is to remotely control AC units which are not intrinsically WiFi-compatible. The system consists of a Raspberry-Pi-based controller connected to an IR transmitting circuit, and a mobile app for sending commands.
 The system is capable of controlling power, temperature and fan speed. 
 ## Technologies
 ### Server
@@ -21,7 +21,7 @@ The system is capable of controlling power, temperature and fan speed.
 * BJT
 ## Development Process
 ### 1. Choosing Platforms & Protocols
-When you're on your way home in July, waiting for your AC unit to turn on after sending the command from your mobile is completely unacceptable. Therefore, polling for commands was
+When you're on your way home in July, waiting for your AC unit to turn on after sending the command from your mobile is completely unacceptable. Therefore, having the controller periodically poll for commands was
 out of the question. I needed a Real-Time solution, and MQTT protocol provided me with exactly this: a topic-based publisher-subscriber model with good round trip times
 for this project's purposes. I used HiveMQ Community Edition MQTT Server, and installed it along with the RBAC Extension on an AWS EC2 instance. <br/>
 As for the controller unit, I chose Raspberry Pi because of its functional flexibility, small size and low pricing. 
@@ -33,9 +33,9 @@ Each user has at least one role, and has to enter its username and password In o
 ### 3. Implementation
 #### 3.1 Mobile App
 The app provides the user with a simple remote-control display and allows them to control the power status (ON/OFF), temperature, and fan speed of the AC unit. The app's functinality is event-driven. An event can be either the user's interactions with the display widgets, or an incoming status message from the controller unit. Naturally, the app's MQTT client is given the Command Maker role. Upon startup, after establishing the MQTT connection, the app sends a status request to the controller and then displays the current status of the AC unit to the user (based on the last values saved in the controller unit). To make it easier for the user to manipulate the AC attributes, as well as to avoid sending unnecessary commands, each outgoing command message is delayed by 1sec after the last user interaction. For each modification made, the MQTT client receives a confirmation from the controller that the associated command has been transmitted to the AC unit. Once this confirmation is received,  the user is informed of the new status.
-#### 3.2 Controller
-The controller's MQTT client is constantly waiting for incmoing commands. Once a command arrives, it executes it using the IR-transmitting circuit and sends back a confirmation message on the relevant status topic (power / temperature / fan).
-The controller's clientId contains its mac address, so it can only receive messages specifically addressed to it.
+#### 3.2 Raspberry-Pi-based Controller
+The controller's MQTT client is constantly waiting for incmoing commands. Once a command arrives, it is executed using the IR-transmitting circuit and sends back a confirmation message on the relevant status topic (power / temperature / fan).
+The controller's ClientId contains its mac address, so it can only receive messages specifically addressed to it.
 Implementing the execution of the received commands included two phases:
 1. Preliminary phase: building an IR receiver circuit and recording signals of the original remote-control of the AC unit, using Lirc virtual device and ir-ctl tool.
 2. Operational phase: Building an IR transmitter circuit to be used for transmitting the relevant IR signals.
