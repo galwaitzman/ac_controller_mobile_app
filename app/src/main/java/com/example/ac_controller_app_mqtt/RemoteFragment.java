@@ -58,6 +58,7 @@ public class RemoteFragment extends Fragment {
                fan2.setEnabled(false);
                fan3.setEnabled(false);
                fan4.setEnabled(false);
+               Services.setCurrentFanSpeedImages(getActivity(),"FAN_SPEED_NONE");
                if (buttonView.isPressed()) { //if user triggered
                    if (isChecked) {
                        countTimeFromClickThenAction(getActivity(), Actions.TURN_ON, null);
@@ -80,6 +81,7 @@ public class RemoteFragment extends Fragment {
                fan2.setEnabled(false);
                fan3.setEnabled(false);
                fan4.setEnabled(false);
+               Services.setCurrentFanSpeedImages(getActivity(),"FAN_SPEED_NONE");
                temp_down.setEnabled(true);
                desired_temp_text.setText((String.valueOf(desired_temp_text_int+1)));
                desired_temp_text.setTextColor(Color.GRAY);
@@ -95,6 +97,7 @@ public class RemoteFragment extends Fragment {
                 fan2.setEnabled(false);
                 fan3.setEnabled(false);
                 fan4.setEnabled(false);
+                Services.setCurrentFanSpeedImages(getActivity(),"FAN_SPEED_NONE");
                 temp_up.setEnabled(true);
                 int desired_temp_text_int = Integer.parseInt(desired_temp_text.getText().toString());
                 if (desired_temp_text_int == 17) {
