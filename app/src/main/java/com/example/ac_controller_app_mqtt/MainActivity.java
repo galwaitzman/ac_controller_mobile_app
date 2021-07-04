@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import android.telephony.TelephonyManager;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     static MediaPlayer soundPlayer;
     private SharedPreferences sp;
     static Integer current_temp = 0;
+    static String current_fan_speed;
     static AtomicBoolean userAwaitsReply;
     private ProgressBar waitForStatusBar;
     private String clientId;
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView desired_temp_text;
     private Button temp_up;
     private Button temp_down;
+    private View remoteFragmentRootLayout;
     private ImageButton fan1;
     private ImageButton fan2;
     private ImageButton fan3;
@@ -127,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
         fan2 = findViewById(R.id.fan_level_2);
         fan3 = findViewById(R.id.fan_level_3);
         fan4 = findViewById(R.id.fan_level_4);
+        current_fan_speed = "FAN_SPEED_NONE";
+        remoteFragmentRootLayout = findViewById(R.id.remote_fragment_root);
         temp_up.setEnabled(false);
         temp_down.setEnabled(false);
         power_switch.setEnabled(false);
@@ -186,18 +191,35 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         if (topic.contains("onoff")) {
                             if (msgContent.equals("ON")) {
-                                runOnUiThread(() -> power_switch.setText("ON"));
-                                runOnUiThread(() -> power_switch.setChecked(true));
-                                runOnUiThread(() ->desired_temp_text.setTextColor(Color.GREEN));
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        power_switch.setText("ON");
+                                        power_switch.setChecked(true);
+                                        desired_temp_text.setTextColor(Color.GREEN);
+                                        remoteFragmentRootLayout.setBackgroundResource(R.drawable.remote_rectangle);
+                                    }
+                                });
                             } else {
-                                runOnUiThread(() -> power_switch.setText("OFF"));
-                                runOnUiThread(() -> power_switch.setChecked(false));
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        power_switch.setText("OFF");
+                                        power_switch.setChecked(false);
+                                        remoteFragmentRootLayout.setBackgroundResource(R.drawable.remote_rectangle_off);
+                                    }
+                                });
+
                             }
 
                         }
                         else {
                             if (topic.contains("fan")) {
-                                runOnUiThread(() -> setCurrentFanSpeedImages(MainActivity.this,msgContent));
+                                runOnUiThread(() ->
+                                {
+                                    setCurrentFanSpeedImages(MainActivity.this,msgContent);
+                                    current_fan_speed = msgContent;
+                                });
                             }
                         }
                     }
@@ -217,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
                             desired_temp_text.setTextColor(Color.GREEN);
                             desired_temp_text.setText(msgContent);
                         });
-
+                        setCurrentFanSpeedImages(MainActivity.this,current_fan_speed);
                     }
                     else {
                         if (topic.contains("onoff")) {
@@ -233,16 +255,27 @@ public class MainActivity extends AppCompatActivity {
                             }
                             runOnUiThread(() ->power_switch.setText(msgContent));
                             if (msgContent.equals("OFF")) {
-                                runOnUiThread(() -> power_switch.setChecked(false));
-                                runOnUiThread(() -> desired_temp_text.setTextColor(Color.GRAY));
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        power_switch.setChecked(false);
+                                        desired_temp_text.setTextColor(Color.GRAY);
+                                        remoteFragmentRootLayout.setBackgroundResource(R.drawable.remote_rectangle_off);
+                                    }
+                                });
                             }
                             else { //ON
                                 runOnUiThread(() -> power_switch.setChecked(true));
+                                remoteFragmentRootLayout.setBackgroundResource(R.drawable.remote_rectangle);
                             }
                         }
                         else {
                             if (topic.contains("fan")) {
-                                runOnUiThread(() -> setCurrentFanSpeedImages(MainActivity.this, msgContent));
+                                runOnUiThread(() ->
+                                {
+                                    setCurrentFanSpeedImages(MainActivity.this, msgContent);
+                                    current_fan_speed = msgContent;
+                                });
                                 if (userAwaitsReply.get()) {
                                     userAwaitsReply.set(false);
                                     runOnUiThread(() -> {
