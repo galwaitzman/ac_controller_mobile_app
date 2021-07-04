@@ -20,14 +20,14 @@ The system is capable of controlling power, temperature and fan speed.
 * IR Receiver
 * IR LED Transmitter
 * BJT
-## Development Process
-### 1. Choosing Platforms & Protocols
-When you're on your way home in July, waiting for your AC unit to turn on after sending the command from your mobile is completely unacceptable. Therefore, having the controller periodically poll for commands was
-out of the question. A Real Time solution was required and MQTT protocol was suitable for the task: a topic-based publisher-subscriber model with good round trip times
-for this project's purposes. I used HiveMQ Community Edition MQTT Server, and installed it along with the RBAC Extension on an AWS EC2 instance. <br/>
-As for the controller unit, I chose Raspberry Pi because of its functional flexibility, small size and low pricing. 
-### 2. Defining MQTT Roles & Credentials
-In the server configuration files, I defined two roles: Command Maker and Controller. <br/>
+## Project Components
+### 1. Platforms & Protocols
+When you send your AC unit a Turn-On command before you get home, you expect it to start cooling the room immediately, not at some random time in the future. Therefore, having the controller periodically poll for commands was
+out of the question. A Real Time solution was preferred and MQTT protocol was suitable for the task: a topic-based publisher-subscriber model which has good round trip times
+for this project's purposes and is also lightweight and easy to use. The project relies on HiveMQ Community Edition MQTT Server, installed along with the RBAC Extension on an AWS EC2 instance. <br/>
+As for the controller unit, Raspberry Pi was chosen due to its functional flexibility, small size and low pricing. 
+### 2. MQTT Roles & Credentials
+In the server configuration files, two roles are defined: Command Maker and Controller. <br/>
 A Command Maker can publish to Command topics only, and subscribe to Status topics.<br/>
 A Controller can subscribe to Command topics that match its ClientId and publish to Status topics that match its ClientId.<br/>
 Each user has at least one role, and has to enter its username and password In order to connect to the server.
@@ -37,10 +37,10 @@ The app provides the user with a simple remote-control display and allows them t
 #### 3.2 Raspberry-Pi-based Controller
 The controller's MQTT client is constantly waiting for incmoing commands. Once a command arrives, it is executed using the IR-transmitting circuit and sends back a confirmation message on the relevant status topic (power / temperature / fan).
 The controller's ClientId contains its mac address, so it can only receive messages specifically addressed to it.
-Implementing the execution of the received commands included two phases:
+Implementing the execution of the received commands includes two phases:
 1. Preliminary phase: Building an IR receiver circuit and recording signals of the original remote-control of the AC unit, using Lirc virtual device and ir-ctl tool.
 2. Operational phase: Building an IR transmitter circuit to be used for transmitting the relevant IR signals.
-Ultimately, I used Cron utility to make the program run at OS startup, and installed the controller within clear sight of the AC unit built-in IR receiver.<br/>
+Ultimately, Cron utility is used in order to make the program run at OS startup, and the controller is installed within clear sight of the AC unit built-in IR receiver.<br/>
 <img src = "https://github.com/galwaitzman/ac_controller_mobile_app/blob/master/%E2%80%8F%E2%80%8Fcontroller.PNG" width = "50%" height="50%"/>
 
 ## System Workflow
