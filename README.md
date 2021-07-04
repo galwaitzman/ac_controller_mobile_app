@@ -46,4 +46,5 @@ Ultimately, I used Cron utility to make the program run at OS startup, and insta
 Commands are sent from mobile app users to the MQTT server, which passes them on to the controller. The controller executes the commands by sending IR signals to the AC unit, and sends confirmation messages back to mobile app users.<br/><br/>
 <img src = "https://github.com/galwaitzman/ac_controller_mobile_app/blob/master/%E2%80%8F%E2%80%8Fworkflow.PNG" width = "60%" height="60%">
 ## Demo
-<img src = "https://github.com/galwaitzman/ac_controller_mobile_app/blob/master/demo.gif" width = "30%" height="30%">
+<br/>
+<img src = "https://github.com/galwaitzman/ac_controller_mobile_app/blob/master/demo.gif" width = "25%" height="25%">
